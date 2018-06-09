@@ -32,35 +32,61 @@ public class JogoDaVelha {
     //Obtém coluna e linha da jogada para facilitar testes
     public boolean vitoria(int linha, int coluna) {
 
+        boolean retorno = true;
+
         //Verifica linha
-        for (int i = 1; i < 4; i++){
-            if (tabuleiro[linha][i] == '-' || tabuleiro[linha][i-1] != tabuleiro[linha][i]){
-                return false;
+        for (int i = 1; i < 4; i++) {
+            if (tabuleiro[linha][i] == '-' || tabuleiro[linha][i - 1] != tabuleiro[linha][i]) {
+                retorno = false;
+                break;
             }
         }
 
-        //Verifica coluna
-        for (int i = 1; i < 4; i++){
-            if (tabuleiro[i][coluna] == '-' || tabuleiro[i-1][coluna] != tabuleiro[i][coluna]){
-                return false;
+        if (!retorno){
+
+            retorno = true;
+
+            //Verifica coluna
+            for (int i = 1; i < 4; i++) {
+                if (tabuleiro[i][coluna] == '-' || tabuleiro[i - 1][coluna] != tabuleiro[i][coluna]) {
+                    retorno = false;
+                    break;
+                }
+            }
+
+        }
+
+        if (!retorno) {
+
+            retorno = true;
+
+            //Verifica diagonais
+            for (int i = 1, j = 1; i < 4; i++, j++) {
+                if (tabuleiro[i][j] == '-' || tabuleiro[i - 1][j - 1] != tabuleiro[i][j]) {
+                    retorno = false;
+                    break;
+                }
             }
         }
 
-        //Verifica diagonais
-        for (int i = 1, j = 1; i < 4; i++, j++){
-            if(tabuleiro[i][j] == '-' || tabuleiro[i-1][j-1] != tabuleiro[i][j]){
-                return false;
+        if (!retorno) {
+
+            retorno = true;
+
+            for (int i = 2, j = 1; j < 4; i--, j++) {
+                if (tabuleiro[i][j] == '-' || tabuleiro[i + 1][j - 1] != tabuleiro[i][j]) {
+                    retorno = false;
+                    break;
+                }
             }
         }
 
-        for (int i = 4, j = 1; j < 4; i--, j++){
-            if(tabuleiro[i][j] == '-' || tabuleiro[i+1][j-1] != tabuleiro[i][j]){
-                return false;
-            }
+
+        if (retorno){
+            zerarTabuleiro();
         }
 
-        zerarTabuleiro();
-        return true;
+        return retorno;
     }
 
     public boolean empate() {

@@ -1,6 +1,8 @@
 package com.example.shikado.jogodavelha4x4.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,7 +33,10 @@ public class Tabuleiro extends AppCompatActivity {
 
         tv_vez = findViewById(R.id.tv_vez);
         tv_placar_cruz = findViewById(R.id.tv_placar_cruz);
-        tv_placar_bola = findViewById(R.id.tv_placar_cruz);
+        tv_placar_bola = findViewById(R.id.tv_placar_bola);
+
+        tv_placar_cruz.setText("0");
+        tv_placar_bola.setText("0");
 
         im_00 = findViewById(R.id.im_00);
         im_01 = findViewById(R.id.im_01);
@@ -168,13 +173,31 @@ public class Tabuleiro extends AppCompatActivity {
 
     private void realizarMovimento(int linha, int coluna, ImageView im){
 
+        AlertDialog.Builder builder_msg = new AlertDialog.Builder(this);
+        AlertDialog msg_vencedor;
+
+        im.setEnabled(false);
+
         if (partida.getVez().equals("CRUZ")){
             im.setImageResource(R.drawable.xis);
             partida.jogada(linha, coluna);
 
             if (partida.vitoria(linha, coluna)){
+
+                builder_msg.setTitle("VENCEDOR: CRUZ!");
+                builder_msg.setCancelable(true);
+                builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                msg_vencedor = builder_msg.create();
+                msg_vencedor.show();
+
                 placar_cruz++;
-                tv_placar_cruz.setText(placar_cruz);
+                tv_placar_cruz.setText((Integer.toString(placar_cruz)));
                 limparTabuleiro();
             }
 
@@ -188,8 +211,21 @@ public class Tabuleiro extends AppCompatActivity {
             partida.jogada(linha,coluna);
 
             if (partida.vitoria(linha, coluna)){
+
+                builder_msg.setTitle("VENCEDOR: BOLA!");
+                builder_msg.setCancelable(true);
+                builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                msg_vencedor = builder_msg.create();
+                msg_vencedor.show();
+
                 placar_bola++;
-                tv_placar_bola.setText(placar_bola);
+                tv_placar_bola.setText(Integer.toString(placar_bola));
                 limparTabuleiro();
             }
 
@@ -200,7 +236,6 @@ public class Tabuleiro extends AppCompatActivity {
 
             partida.passarVez();
             tv_vez.setText(partida.getVez());
-            im.setEnabled(false);
     }
 
 
