@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.example.shikado.jogodavelha4x4.R;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import jogodavelha.JogoDaVelha;
 
 public class Tabuleiro extends AppCompatActivity {
@@ -18,18 +22,19 @@ public class Tabuleiro extends AppCompatActivity {
     TextView tv_vez, tv_placar_cruz, tv_placar_bola;
     JogoDaVelha partida;
     int placar_cruz = 0, placar_bola = 0;
+    List<ImageView> casas = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        partida = new JogoDaVelha(getIntent().getExtras().getString("GAME_MODE"));
+        partida = new JogoDaVelha();
 
         inicializarTabuleiro();
     }
 
-    private void inicializarTabuleiro(){
+    private void inicializarTabuleiro() {
 
         tv_vez = findViewById(R.id.tv_vez);
         tv_placar_cruz = findViewById(R.id.tv_placar_cruz);
@@ -55,134 +60,350 @@ public class Tabuleiro extends AppCompatActivity {
         im_32 = findViewById(R.id.im_32);
         im_33 = findViewById(R.id.im_33);
 
+        casas.add(im_00);
+        casas.add(im_01);
+        casas.add(im_02);
+        casas.add(im_03);
+        casas.add(im_10);
+        casas.add(im_11);
+        casas.add(im_12);
+        casas.add(im_13);
+        casas.add(im_20);
+        casas.add(im_21);
+        casas.add(im_22);
+        casas.add(im_23);
+        casas.add(im_30);
+        casas.add(im_31);
+        casas.add(im_32);
+        casas.add(im_33);
+
         tv_vez.setText(partida.getVez());
+        if (getIntent().getExtras().getString("GAME_MODE").equals("MULTIPLAYER")) {
+            im_00.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(0, 0, im_00);
+                }
+            });
 
-        im_00.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(0,0, im_00);
-            }
-        });
+            im_01.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(0, 1, im_01);
+                }
+            });
 
-        im_01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(0,1, im_01);
-            }
-        });
+            im_02.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(0, 2, im_02);
+                }
+            });
 
-        im_02.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(0,2, im_02);
-            }
-        });
+            im_03.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(0, 3, im_03);
+                }
+            });
 
-        im_03.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(0,3, im_03);
-            }
-        });
+            im_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(1, 0, im_10);
+                }
+            });
 
-        im_10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(1,0, im_10);
-            }
-        });
+            im_11.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(1, 1, im_11);
+                }
+            });
 
-        im_11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(1,1, im_11);
-            }
-        });
+            im_12.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(1, 2, im_12);
+                }
+            });
 
-        im_12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(1,2, im_12);
-            }
-        });
+            im_13.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(1, 3, im_13);
+                }
+            });
 
-        im_13.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(1,3, im_13);
-            }
-        });
+            im_20.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(2, 0, im_20);
+                }
+            });
 
-        im_20.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(2,0, im_20);
-            }
-        });
+            im_21.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(2, 1, im_21);
+                }
 
-        im_21.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(2,1, im_21);
-            }
+            });
 
-        });
+            im_22.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(2, 2, im_22);
+                }
+            });
 
-        im_22.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(2,2, im_22);
-            }
-        });
+            im_23.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(2, 3, im_23);
+                }
+            });
 
-        im_23.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(2,3, im_23);
-            }
-        });
+            im_30.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(3, 0, im_30);
+                }
+            });
 
-        im_30.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(3,0, im_30);
-            }
-        });
+            im_31.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(3, 1, im_31);
+                }
+            });
 
-        im_31.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(3,1, im_31);
-            }
-        });
+            im_32.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(3, 2, im_32);
+                }
+            });
 
-        im_32.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(3,2, im_32);
-            }
-        });
+            im_33.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarMultiPlayer(3, 3, im_33);
+                }
+            });
 
-        im_33.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                realizarMovimento(3,3, im_33);
-            }
-        });
+        } else {
+            im_00.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(0, 0, im_00);
+                }
+            });
+
+            im_01.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(0, 0, im_01);
+                }
+            });
+
+            im_02.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(0, 2, im_02);
+                    ;
+                }
+            });
+
+            im_03.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(0, 3, im_03);
+                }
+            });
+
+            im_10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(1, 0, im_10);
+                }
+            });
+
+            im_11.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(1, 1, im_11);
+                }
+            });
+
+            im_12.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(1, 2, im_12);
+                }
+            });
+
+            im_13.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(1, 3, im_13);
+                }
+            });
+
+            im_20.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(2, 0, im_20);
+                }
+            });
+
+            im_21.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(2, 1, im_21);
+                }
+
+            });
+
+            im_22.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(2, 2, im_22);
+                }
+            });
+
+            im_23.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(2, 3, im_23);
+                }
+            });
+
+            im_30.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(3, 0, im_30);
+                }
+            });
+
+            im_31.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(3, 1, im_31);
+                }
+            });
+
+            im_32.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(3, 2, im_32);
+                }
+            });
+
+            im_33.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jogarSinglePlayer(3, 3, im_33);
+                }
+            });
+        }
     }
 
-    private void realizarMovimento(int linha, int coluna, ImageView im){
+    private void jogarSinglePlayer(int linha, int coluna, ImageView im) {
+        AlertDialog.Builder builder_msg = new AlertDialog.Builder(this);
+        AlertDialog msg_vencedor;
+
+        im.setEnabled(false);
+
+        int randomico;
+
+        im.setImageResource(R.drawable.xis);
+        partida.jogada(linha, coluna);
+
+        if (partida.vitoria(linha, coluna)) {
+
+            builder_msg.setTitle("VENCEDOR: CRUZ!");
+            builder_msg.setCancelable(true);
+            builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            msg_vencedor = builder_msg.create();
+            msg_vencedor.show();
+
+            placar_cruz++;
+            tv_placar_cruz.setText((Integer.toString(placar_cruz)));
+            limparTabuleiro();
+        } else if (partida.empate()) {
+            limparTabuleiro();
+        }
+
+        partida.passarVez();
+        tv_vez.setText(partida.getVez());
+
+        do {
+            randomico = new Random().nextInt(15);
+            im = casas.get(randomico);
+        }while (!im.isEnabled());
+
+        im.setEnabled(false);
+
+        im.setImageResource(R.drawable.circulo);
+        partida.jogada(randomico/4, randomico%4);
+
+        if (partida.vitoria(linha, coluna)) {
+
+            builder_msg.setTitle("VENCEDOR: BOLA!");
+            builder_msg.setCancelable(true);
+            builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            msg_vencedor = builder_msg.create();
+            msg_vencedor.show();
+
+            placar_bola++;
+            tv_placar_bola.setText(Integer.toString(placar_bola));
+            limparTabuleiro();
+
+        } else if (partida.empate()) {
+            builder_msg.setTitle("EMPATE!");
+            builder_msg.setCancelable(true);
+            builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            msg_vencedor = builder_msg.create();
+            msg_vencedor.show();
+            limparTabuleiro();
+        }
+
+
+        partida.passarVez();
+        tv_vez.setText(partida.getVez());
+    }
+
+    private void jogarMultiPlayer(int linha, int coluna, ImageView im) {
 
         AlertDialog.Builder builder_msg = new AlertDialog.Builder(this);
         AlertDialog msg_vencedor;
 
         im.setEnabled(false);
 
-        if (partida.getVez().equals("CRUZ")){
+        if (partida.getVez().equals("CRUZ")) {
             im.setImageResource(R.drawable.xis);
             partida.jogada(linha, coluna);
 
-            if (partida.vitoria(linha, coluna)){
+            if (partida.vitoria(linha, coluna)) {
 
                 builder_msg.setTitle("VENCEDOR: CRUZ!");
                 builder_msg.setCancelable(true);
@@ -199,18 +420,14 @@ public class Tabuleiro extends AppCompatActivity {
                 placar_cruz++;
                 tv_placar_cruz.setText((Integer.toString(placar_cruz)));
                 limparTabuleiro();
-            }
-
-            else if (partida.empate()) {
+            } else if (partida.empate()) {
                 limparTabuleiro();
             }
-        }
-
-        else{
+        } else {
             im.setImageResource(R.drawable.circulo);
-            partida.jogada(linha,coluna);
+            partida.jogada(linha, coluna);
 
-            if (partida.vitoria(linha, coluna)){
+            if (partida.vitoria(linha, coluna)) {
 
                 builder_msg.setTitle("VENCEDOR: BOLA!");
                 builder_msg.setCancelable(true);
@@ -227,9 +444,7 @@ public class Tabuleiro extends AppCompatActivity {
                 placar_bola++;
                 tv_placar_bola.setText(Integer.toString(placar_bola));
                 limparTabuleiro();
-            }
-
-            else if (partida.empate()) {
+            } else if (partida.empate()) {
                 builder_msg.setTitle("EMPATE!");
                 builder_msg.setCancelable(true);
                 builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -245,8 +460,8 @@ public class Tabuleiro extends AppCompatActivity {
             }
         }
 
-            partida.passarVez();
-            tv_vez.setText(partida.getVez());
+        partida.passarVez();
+        tv_vez.setText(partida.getVez());
     }
 
 

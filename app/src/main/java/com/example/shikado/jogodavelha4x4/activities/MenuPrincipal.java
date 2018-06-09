@@ -30,5 +30,14 @@ public class MenuPrincipal extends AppCompatActivity {
                 startActivity(novo_jogo);
             }
         });
+
+        bt_singleplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent novo_jogo = new Intent(MenuPrincipal.this, Tabuleiro.class);
+                novo_jogo.putExtra("GAME_MODE","SINGLEPLAYER");
+                startActivity(novo_jogo);
+            }
+        });
     }
 }

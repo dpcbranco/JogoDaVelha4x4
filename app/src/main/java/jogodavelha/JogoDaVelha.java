@@ -7,7 +7,7 @@ public class JogoDaVelha {
     private char tabuleiro [][] = new char[4][4];
     private String vez = "CRUZ";
 
-    public  JogoDaVelha (String modo){
+    public  JogoDaVelha (){
         zerarTabuleiro();
     }
 
