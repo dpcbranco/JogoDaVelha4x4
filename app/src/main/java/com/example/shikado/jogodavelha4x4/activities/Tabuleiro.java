@@ -230,6 +230,17 @@ public class Tabuleiro extends AppCompatActivity {
             }
 
             else if (partida.empate()) {
+                builder_msg.setTitle("EMPATE!");
+                builder_msg.setCancelable(true);
+                builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                msg_vencedor = builder_msg.create();
+                msg_vencedor.show();
                 limparTabuleiro();
             }
         }

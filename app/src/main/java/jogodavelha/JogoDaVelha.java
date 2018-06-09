@@ -92,8 +92,10 @@ public class JogoDaVelha {
     public boolean empate() {
 
         for (char[] linha: tabuleiro){
-            if (Arrays.binarySearch(linha, '-')  >= 0){
-                return false;
+            for (char coluna: linha){
+                if (coluna == '-'){
+                    return false;
+                }
             }
         }
 
