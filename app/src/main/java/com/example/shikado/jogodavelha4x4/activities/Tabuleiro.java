@@ -13,8 +13,9 @@ import jogodavelha.JogoDaVelha;
 public class Tabuleiro extends AppCompatActivity {
 
     ImageView im_00, im_01, im_02, im_03, im_10, im_11, im_12, im_13, im_20, im_21, im_22, im_23, im_30, im_31, im_32, im_33;
-    TextView tv_vez;
+    TextView tv_vez, tv_placar_cruz, tv_placar_bola;
     JogoDaVelha partida;
+    int placar_cruz = 0, placar_bola = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -29,6 +30,8 @@ public class Tabuleiro extends AppCompatActivity {
     private void inicializarTabuleiro(){
 
         tv_vez = findViewById(R.id.tv_vez);
+        tv_placar_cruz = findViewById(R.id.tv_placar_cruz);
+        tv_placar_bola = findViewById(R.id.tv_placar_cruz);
 
         im_00 = findViewById(R.id.im_00);
         im_01 = findViewById(R.id.im_01);
@@ -52,259 +55,191 @@ public class Tabuleiro extends AppCompatActivity {
         im_00.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (partida.getVez().equals("CRUZ")){
-                    im_00.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_00.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(0,0);
-                tv_vez.setText(partida.getVez());
-                im_00.setEnabled(false);
+                realizarMovimento(0,0, im_00);
             }
         });
 
         im_01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_01.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_01.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(0,1);
-                tv_vez.setText(partida.getVez());
-                im_01.setEnabled(false);
+                realizarMovimento(0,1, im_01);
             }
         });
 
         im_02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_02.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_02.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(0,2);
-                tv_vez.setText(partida.getVez());
-                im_02.setEnabled(false);
+                realizarMovimento(0,2, im_02);
             }
         });
 
         im_03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_03.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_03.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(0,3);
-                tv_vez.setText(partida.getVez());
-                im_03.setEnabled(false);
+                realizarMovimento(0,3, im_03);
             }
         });
 
         im_10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_10.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_10.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(1,0);
-                tv_vez.setText(partida.getVez());
-                im_10.setEnabled(false);
+                realizarMovimento(1,0, im_10);
             }
         });
 
         im_11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_11.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_11.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(1,1);
-                tv_vez.setText(partida.getVez());
-                im_11.setEnabled(false);
+                realizarMovimento(1,1, im_11);
             }
         });
 
         im_12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_12.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_12.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(1,2);
-                tv_vez.setText(partida.getVez());
-                im_12.setEnabled(false);
+                realizarMovimento(1,2, im_12);
             }
         });
 
         im_13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_13.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_13.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(1,3);
-                tv_vez.setText(partida.getVez());
-                im_13.setEnabled(false);
+                realizarMovimento(1,3, im_13);
             }
         });
 
         im_20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_20.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_20.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(2,0);
-                tv_vez.setText(partida.getVez());
-                im_20.setEnabled(false);
+                realizarMovimento(2,0, im_20);
             }
         });
 
         im_21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_21.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_21.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(2,1);
-                tv_vez.setText(partida.getVez());
-                im_21.setEnabled(false);
+                realizarMovimento(2,1, im_21);
             }
+
         });
 
         im_22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_22.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_22.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(2,2);
-                tv_vez.setText(partida.getVez());
-                im_22.setEnabled(false);
+                realizarMovimento(2,2, im_22);
             }
         });
 
         im_23.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_23.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_23.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(2,3);
-                tv_vez.setText(partida.getVez());
-                im_23.setEnabled(false);
+                realizarMovimento(2,3, im_23);
             }
         });
 
         im_30.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_30.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_30.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(3,0);
-                tv_vez.setText(partida.getVez());
-                im_30.setEnabled(false);
+                realizarMovimento(3,0, im_30);
             }
         });
 
         im_31.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_31.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_31.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(3,1);
-                tv_vez.setText(partida.getVez());
-                im_31.setEnabled(false);
+                realizarMovimento(3,1, im_31);
             }
         });
 
         im_32.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_32.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_32.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(3,2);
-                tv_vez.setText(partida.getVez());
-                im_32.setEnabled(false);
+                realizarMovimento(3,2, im_32);
             }
         });
 
         im_33.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partida.getVez().equals("CRUZ")){
-                    im_33.setImageResource(R.drawable.xis);
-                }
-                else{
-                    im_33.setImageResource(R.drawable.circulo);
-                }
-
-                partida.jogada(3,3);
-                tv_vez.setText(partida.getVez());
-                im_33.setEnabled(false);
+                realizarMovimento(3,3, im_33);
             }
         });
+    }
+
+    private void realizarMovimento(int linha, int coluna, ImageView im){
+
+        if (partida.getVez().equals("CRUZ")){
+            im.setImageResource(R.drawable.xis);
+            partida.jogada(linha, coluna);
+
+            if (partida.vitoria(linha, coluna)){
+                placar_cruz++;
+                tv_placar_cruz.setText(placar_cruz);
+                limparTabuleiro();
+            }
+
+            else if (partida.empate()) {
+                limparTabuleiro();
+            }
+        }
+
+        else{
+            im.setImageResource(R.drawable.circulo);
+            partida.jogada(linha,coluna);
+
+            if (partida.vitoria(linha, coluna)){
+                placar_bola++;
+                tv_placar_bola.setText(placar_bola);
+                limparTabuleiro();
+            }
+
+            else if (partida.empate()) {
+                limparTabuleiro();
+            }
+        }
+
+            partida.passarVez();
+            tv_vez.setText(partida.getVez());
+            im.setEnabled(false);
+    }
+
+
+    private void limparTabuleiro() {
+
+        im_00.setImageDrawable(null);
+        im_01.setImageDrawable(null);
+        im_02.setImageDrawable(null);
+        im_03.setImageDrawable(null);
+        im_10.setImageDrawable(null);
+        im_11.setImageDrawable(null);
+        im_12.setImageDrawable(null);
+        im_13.setImageDrawable(null);
+        im_20.setImageDrawable(null);
+        im_21.setImageDrawable(null);
+        im_22.setImageDrawable(null);
+        im_23.setImageDrawable(null);
+        im_30.setImageDrawable(null);
+        im_31.setImageDrawable(null);
+        im_32.setImageDrawable(null);
+        im_33.setImageDrawable(null);
+
+        im_00.setEnabled(true);
+        im_01.setEnabled(true);
+        im_02.setEnabled(true);
+        im_03.setEnabled(true);
+        im_10.setEnabled(true);
+        im_11.setEnabled(true);
+        im_12.setEnabled(true);
+        im_13.setEnabled(true);
+        im_20.setEnabled(true);
+        im_21.setEnabled(true);
+        im_22.setEnabled(true);
+        im_23.setEnabled(true);
+        im_30.setEnabled(true);
+        im_31.setEnabled(true);
+        im_32.setEnabled(true);
+        im_33.setEnabled(true);
+
     }
 
 }

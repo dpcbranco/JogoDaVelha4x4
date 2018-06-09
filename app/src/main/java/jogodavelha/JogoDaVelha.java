@@ -6,44 +6,32 @@ public class JogoDaVelha {
 
     private char tabuleiro [][] = new char[4][4];
     private String vez = "CRUZ";
-    private int cruz = 0, bola = 0;
 
     public  JogoDaVelha (String modo){
-        for (char[] linha: tabuleiro){
-            Arrays.fill(linha, '-');
-        }
+        zerarTabuleiro();
     }
 
      public void jogada(int linha, int coluna){
         if (vez.equals("CRUZ")){
             tabuleiro[linha][coluna] = 'X';
-            vez = "BOLA";
         }
         else{
             tabuleiro[linha][coluna] = 'O';
-            vez = "CRUZ";
-        }
-
-        if (empate()){
-            //Gerar alerta
-            //Zera tabuleiro
-        }
-
-        else if (vitoria(linha, coluna)){
-            //Gerar vitoria
-
-            if (vez.equals(("CRUZ"))){
-                cruz++;
-            }
-
-            else{
-                bola++;
-            }
-
         }
     }
 
-    private boolean vitoria(int linha, int coluna) {
+    public void passarVez(){
+        if (vez.equals("CRUZ")){
+            vez = "BOLA";
+        }
+        else{
+            vez = "CRUZ";
+        }
+    }
+
+    //Obtém coluna e linha da jogada para facilitar testes
+    public boolean vitoria(int linha, int coluna) {
+
         //Verifica linha
         for (int i = 1; i < 4; i++){
             if (tabuleiro[linha][i] == '-' || tabuleiro[linha][i-1] != tabuleiro[linha][i]){
@@ -71,10 +59,11 @@ public class JogoDaVelha {
             }
         }
 
+        zerarTabuleiro();
         return true;
     }
 
-    private boolean empate() {
+    public boolean empate() {
 
         for (char[] linha: tabuleiro){
             if (Arrays.binarySearch(linha, '-')  >= 0){
@@ -82,10 +71,17 @@ public class JogoDaVelha {
             }
         }
 
+        zerarTabuleiro();
         return true;
     }
 
     public String getVez() {
         return vez;
+    }
+
+    private void zerarTabuleiro(){
+        for (char[] linha: tabuleiro){
+            Arrays.fill(linha, '-');
+        }
     }
 }
