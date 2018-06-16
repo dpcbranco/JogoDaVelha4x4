@@ -204,7 +204,7 @@ public class Tabuleiro extends AppCompatActivity {
             im_01.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    jogarSinglePlayer(0, 0, im_01);
+                    jogarSinglePlayer(0, 1, im_01);
                 }
             });
 
@@ -340,6 +340,17 @@ public class Tabuleiro extends AppCompatActivity {
             tv_placar_cruz.setText((Integer.toString(placar_cruz)));
             limparTabuleiro();
         } else if (partida.empate()) {
+            builder_msg.setTitle("EMPATE!");
+            builder_msg.setCancelable(true);
+            builder_msg.setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            msg_vencedor = builder_msg.create();
+            msg_vencedor.show();
             limparTabuleiro();
         }
 
