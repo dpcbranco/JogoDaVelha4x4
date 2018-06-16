@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import jogodavelha.IA;
 import jogodavelha.JogoDaVelha;
 
 public class Tabuleiro extends AppCompatActivity {
@@ -315,7 +316,8 @@ public class Tabuleiro extends AppCompatActivity {
 
         im.setEnabled(false);
 
-        int randomico;
+        IA computador = new IA();
+        int jogada_computador;
 
         im.setImageResource(R.drawable.xis);
         partida.jogada(linha, coluna);
@@ -344,17 +346,17 @@ public class Tabuleiro extends AppCompatActivity {
         partida.passarVez();
         tv_vez.setText(partida.getVez());
 
-        do {
-            randomico = new Random().nextInt(15);
-            im = casas.get(randomico);
-        }while (!im.isEnabled());
+
+        jogada_computador = computador.jogar(partida.getTabuleiro());
+        im = casas.get(jogada_computador);
+
 
         im.setEnabled(false);
 
         im.setImageResource(R.drawable.circulo);
-        partida.jogada(randomico/4, randomico%4);
+        partida.jogada(jogada_computador/4, jogada_computador%4);
 
-        if (partida.vitoria(linha, coluna)) {
+        if (partida.vitoria(jogada_computador/4, jogada_computador%4)) {
 
             builder_msg.setTitle("VENCEDOR: BOLA!");
             builder_msg.setCancelable(true);

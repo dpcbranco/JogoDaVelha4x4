@@ -112,4 +112,9 @@ public class JogoDaVelha {
             Arrays.fill(linha, '-');
         }
     }
+
+
+    public char[][] getTabuleiro() {
+        return tabuleiro;
+    }
 }
